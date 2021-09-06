@@ -1,0 +1,235 @@
+swagger: '2.0.0'
+info:
+  title: Sample API
+  description: API description in Markdown.
+  version: 1.0.0
+host: localhost:5300
+basePath: /docs
+schemes:
+  - https
+  - music:
+type: Object
+propertys:
+  id:
+  type: integer
+  description: The Auto_Incremente id of de Music
+  category:
+    type: string
+    description: Category of Music
+  playlist:
+    type: array
+    description: Array list
+        
+paths:
+  /:
+    post:
+      tags:
+      - music
+      summary: Returns a list of Music
+      description: List de Playlist Music
+      produces:
+        - application/json
+      parameters:
+      - name: category
+        in: query
+        description: The user email for find
+        required: true
+        type: string
+      - name: playlist
+        in: query
+        description: The playlist music of user 
+        required: true
+        type: string
+      - name: url
+        in: query
+        description: The url playlist music of user 
+        required: true
+        type: url
+        schema:
+          $ref: '#/interface_adapters/IMusic'
+      responses:
+        200:
+        description: OK
+    get:
+      summary: Endpoint for create category music
+      description: Create Category
+      produces:
+        - application/json
+      schema:
+          $ref: '#/interface_adapters/IUser'
+      responses:
+        200:
+        description: OK
+  /user:
+    po:
+      tags:
+      - user
+      summary: Returns a list of users.
+      description: ""
+      operationId: getlist
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: email
+        in: query
+        description: The user email for find
+        required: true
+        type: string
+        schema:
+          $ref: '#/interface_adapters/IUser'
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid email/password supplied
+  /user/{id}:
+    post:
+      tags:
+      - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - in: body
+        name: email
+        description: Created user object
+        required: true
+        example: jes@test.com
+      - in: body
+        name: password
+        description: Password
+        required: true
+        example: Ma2291624*
+        schema:
+          $ref: '#/interface_adapters/IUser'
+      responses:
+        default:
+          description: successful operation
+    put:
+      tags:
+      - user
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: name that need to be updated
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: Updated user object
+        required: true
+        schema:
+          $ref: '#/interface_adapters/IUser'
+      responses:
+        "400":
+          description: Invalid user supplied
+        "404":
+          description: User not found
+    delete:
+      tags:
+      - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: name that need to be updated
+        required: true
+        type: integer
+      responses:
+        "400":
+          description: Invalid email supplied
+        "404":
+          description: User not found
+/user/login:
+    post:
+      tags:
+      - user
+      summary: Logs user into the system
+      description: ""
+      operationId: loginUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: email
+        in: query
+        description: The user email for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid email/password supplied
+  
+definitions:
+  user:
+    properties:
+      id:
+        type: integer
+      email:
+        type: string
+      password:
+        type: string
+    # Both properties are required
+    required:  
+      - id
+      - email
+      - password
+  music:
+    properties:
+      id:
+        type: integer
+      category:
+        type: string
+      playlist:
+        type: array
+      url:
+        type: url
+      user_id:
+        type: integer
+
+# $ref: '#/interface_adapters/IUser'
+# $ref: '#/interface_adapters/IMusic'
