@@ -25,6 +25,9 @@ export class App {
     public settings() {
         this.app.set('port', this.port || process.env.PORT || 5300);
         this.app.set('access-token', config.TOKEN_SECRET);
+        this.app.set('dev',process.env.NODE_ENV || 'development');
+        this.app.set('prod', process.env.NODE_ENV || 'prod');
+        this.app.set('host', process.env.HOST || '127.0.0.1');
     }
 
     private middlewares() {
