@@ -8,5 +8,5 @@ async function main() {
 main();
 
 module.exports = {
-	App,
+	App
 };

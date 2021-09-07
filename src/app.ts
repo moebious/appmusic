@@ -9,7 +9,7 @@ import routesProtected from "./lib/config/protected";
 import { options } from "../swagger/swaggerOptions";
 import swaggerOptions from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
-// import {swaggerDocument} from'../swagger/swagge';
+import swaggerDocument  from "../swagger/swagger.json";
 export class App {
   app: Application;
 
@@ -34,12 +34,13 @@ export class App {
     this.app.use(morgan("dev"));
     this.app.use(cors());
     this.app.use(express.json());
+    this.app.use(express.static(__dirname + "/"));
   }
 
   private routes() {
     const specs = swaggerOptions(options);
     this.app.use(IndexRoutes);
-    this.app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
+    this.app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument, specs));
     this.app.use("/", UserRoutes, routesProtected);
   }
 
