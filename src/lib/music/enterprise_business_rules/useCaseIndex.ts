@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
+import { Request, Response, } from "express";
 
-export function indexWelcome(req: Request, res: Response): Response {
-   return res.json('Hello Welcome to API MUSIC'); 
+export function indexWelcome(req: Request, res: Response,): Response {
+	return res.json("Hello Welcome to API MUSIC",); 
 }

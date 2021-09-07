@@ -16,7 +16,7 @@
     "dev": "set NODE_ENV=development && nodemon src/index.ts",
     "prod": "set NODE_ENV=production && nodemon src/index.ts",
     "start": "node dist/server.js",
-    "slint": "npx eslint --fix",
+    "slint" : "eslint --ext .ts . --fix",
     "build": "tsc -p .",
     "mysql": "nodemon src/database.ts"
   },

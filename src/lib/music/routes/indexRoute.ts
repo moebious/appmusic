@@ -1,10 +1,10 @@
-import { Router } from 'express'
-import { indexWelcome } from '../enterprise_business_rules/useCaseIndex'
-import {getPlayList} from '../../music/application_business_rules/useCaseMusic'
-import { createCategory } from '../application_business_rules/useCaseMusic';
+import { Router } from "express";
+// import { indexWelcome, } from '../enterprise_business_rules/useCaseIndex';
+import { getPlayList } from "../../music/application_business_rules/useCaseMusic";
+import { createCategory } from "../application_business_rules/useCaseMusic";
 
 const router = Router();
-/** 
+/**
  * @swagger
  * components:
  * schemas:
@@ -22,8 +22,7 @@ const router = Router();
  *          description: Array list
  */
 
-
-    /** 
+/** 
     * @swagger
     * /login
     * get
@@ -39,9 +38,9 @@ const router = Router();
     *           $ref: '#/components/schemas/music
     *           propertys:
     
-    */ 
+    */
 
-    /** 
+/** 
     * @swagger
     * /login
     * get
@@ -57,10 +56,7 @@ const router = Router();
     *           $ref: '#/components/schemas/music
     *           propertys:
     
-    */ 
-router.route('/')
-    .get(getPlayList)
-    .post(createCategory)
-
+    */
+router.route("/").get(getPlayList).post(createCategory);
 
 export default router;

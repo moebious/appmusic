@@ -1,13 +1,13 @@
-import { Router } from 'express'
-import { getUser, createUser, getList, deleteUser, updateUser, loginUser } from '../application_business_rules/useCaseUser'
+import { Router, } from "express";
+import { getUser, createUser, getList, deleteUser, updateUser, loginUser, } from "../application_business_rules/useCaseUser";
 const router = Router();
 
 
-router.route('/user')
-    .get(getList)
-    .post(createUser)
+router.route("/user",)
+	.get(getList,)
+	.post(createUser,);
 
-  /**
+/**
  * @swagger
  * /login:
  *   post:
@@ -30,13 +30,13 @@ router.route('/user')
  *         description: login
  */
 
-router.route('/user/:id')
-    .put(updateUser)
-    .get(getUser)
-    .delete(deleteUser)
-    .put(updateUser)
+router.route("/user/:id",)
+	.put(updateUser,)
+	.get(getUser,)
+	.delete(deleteUser,)
+	.put(updateUser,);
 
-    /**
+/**
  * @swagger
  * /login:
  *   post:
@@ -58,8 +58,8 @@ router.route('/user/:id')
  *       200:
  *         description: login
  */
-router.route('/login')
-    .post(loginUser)
+router.route("/login",)
+	.post(loginUser,);
   
 
 export default router;
