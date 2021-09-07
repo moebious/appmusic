@@ -1,27 +1,27 @@
 swagger: '2.0'
 info:
   title: Sample API
-  description: API description in Markdown.
+  description: A simple App of Music 
   version: 1.0.0
+  contact:
+    name: Kevin Vicent
+    url: http://moebio.us
+    email: kevin.vicent@gmail.com
 host: localhost:5300
-basePath: /docs
-schemes:
-  - https
-  - music:
-type: Object
-propertys:
-  id:
-  type: integer
-  description: The Auto_Incremente id of de Music
-  category:
-    type: string
-    description: Category of Music
-  playlist:
-    type: array
-    description: Array list
-        
+licence: MIT
+basePath: /docs        
 paths:
-  /:
+  /: 
+    get:
+      summary: Endpoint for create category music
+      description: Create Category
+      produces:
+        - application/json
+      schema:
+          $ref: '#/interface_adapters/IUser'
+      responses:
+        200:
+        description: OK
     post:
       tags:
       - music
@@ -50,18 +50,8 @@ paths:
       responses:
         200:
         description: OK
-    get:
-      summary: Endpoint for create category music
-      description: Create Category
-      produces:
-        - application/json
-      schema:
-          $ref: '#/interface_adapters/IUser'
-      responses:
-        200:
-        description: OK
   /user:
-    po:
+    get:
       tags:
       - user
       summary: Returns a list of users.
@@ -93,7 +83,7 @@ paths:
           schema:
             type: string
         "400":
-          description: Invalid email/password supplied
+          description: Invalid email/password supplied 
   /user/{id}:
     post:
       tags:

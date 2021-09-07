@@ -62,5 +62,9 @@ For execute this project
 1. execute npm i for instalation of dependencys
 2. npm run dev or npm run prod
 
-*******for mor details please visit : 
+*******for mor details please visit the documentation: ***********
+
+https://app.swaggerhub.com/apis/appMusic/sample-api/1.0.0
+
+
 >>>>>>> 585ef19dabe71705425e335633bea7e20ba184b4
