@@ -56,4 +56,11 @@ MUSIC:
     routes
 
 in each component you will find the readme file with the specifications
+
+For execute this project
+
+1. execute npm i for instalation of dependencys
+2. npm run dev or npm run prod
+
+*******for mor details please visit : 
 >>>>>>> 585ef19dabe71705425e335633bea7e20ba184b4

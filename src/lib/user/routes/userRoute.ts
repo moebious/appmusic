@@ -11,8 +11,30 @@ router.route('/user/:id')
     .get(getUser)
     .delete(deleteUser)
     .put(updateUser)
-  
-    router.route('/login')
+
+    /**
+ * @swagger
+ * /login:
+ *   post:
+ *     description: Login to the application
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: email
+ *         description: Username to use for login.
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         description: User's password.
+ *         in: body
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: login
+ */
+router.route('/login')
     .post(loginUser)
   
 

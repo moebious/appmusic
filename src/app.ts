@@ -9,7 +9,7 @@ import routesProtected from './lib/config/protected';
 import {options} from '../swagger/swaggerOptions'
 import swaggerOptions from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
-// import {swaggerDocument} from'../swagger/swagger';
+// import {swaggerDocument} from'../swagger/swagge';
 export class App {
     app: Application;
 
