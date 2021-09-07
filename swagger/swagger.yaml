@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Sample API
+  title: API app Music
   description: A simple App of Music 
   version: 1.0.0
   contact:
@@ -9,30 +9,30 @@ info:
     email: kevin.vicent@gmail.com
 host: localhost:5300
 licence: MIT
-basePath: /docs        
+basePath: /        
 paths:
   /: 
     get:
-      summary: Endpoint for create category music
-      description: Create Category
+      summary: Endpoint for list category music
+      description: list Music
       produces:
         - application/json
       schema:
-          $ref: '#/interface_adapters/IUser'
+          $ref: '#/definitions/music'
       responses:
         200:
         description: OK
     post:
-      tags:
-      - music
-      summary: Returns a list of Music
-      description: List de Playlist Music
+      summary: Create category of Music
+      description: Create Playlist Music
       produces:
         - application/json
+      schema:
+        $ref: '#/definitions/music'
       parameters:
       - name: category
         in: query
-        description: The user email for find
+        description: The category
         required: true
         type: string
       - name: playlist
@@ -45,8 +45,6 @@ paths:
         description: The url playlist music of user 
         required: true
         type: url
-        schema:
-          $ref: '#/interface_adapters/IMusic'
       responses:
         200:
         description: OK
@@ -55,19 +53,13 @@ paths:
       tags:
       - user
       summary: Returns a list of users.
-      description: ""
-      operationId: getlist
+      description: "List of User whit token"
+      operationId: getList
       produces:
       - application/xml
       - application/json
-      parameters:
-      - name: email
-        in: query
-        description: The user email for find
-        required: true
-        type: string
-        schema:
-          $ref: '#/interface_adapters/IUser'
+      schema:
+        $ref: '#/definitions/user'
       responses:
         "200":
           description: successful operation
@@ -82,9 +74,45 @@ paths:
               description: date in UTC when token expires
           schema:
             type: string
-        "400":
-          description: Invalid email/password supplied 
+        "500":
+          description: Invalid information
   /user/{id}:
+    get:
+      tags:
+      - user
+      summary: Returns a only user
+      description: ""
+      operationId: getUser
+      produces:
+      - application/xml
+      - application/json
+      schema:
+        $ref: '#/definitions/user'
+      parameters:
+      - name: id
+        in: query
+        description: The user id
+        required: true
+        type: integer
+        example: 2
+        schema:
+          $ref: '#/interface_adapters/IMusic'
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "500":
+          description: Invalid information
     post:
       tags:
       - user
@@ -106,7 +134,7 @@ paths:
         required: true
         example: Ma2291624*
         schema:
-          $ref: '#/interface_adapters/IUser'
+          $ref: '#/definitions/user'
       responses:
         default:
           description: successful operation
@@ -130,10 +158,10 @@ paths:
         description: Updated user object
         required: true
         schema:
-          $ref: '#/interface_adapters/IUser'
+          $ref: '#/definitions/user'
       responses:
-        "400":
-          description: Invalid user supplied
+        "200":
+          description: successful
         "404":
           description: User not found
     delete:
@@ -151,12 +179,14 @@ paths:
         description: name that need to be updated
         required: true
         type: integer
+        schema:
+          $ref: '#/definitions/user'
       responses:
         "400":
           description: Invalid email supplied
         "404":
           description: User not found
-/user/login:
+/login:
     post:
       tags:
       - user
@@ -177,6 +207,8 @@ paths:
         description: The password for login in clear text
         required: true
         type: string
+        schema:
+          $ref: '#/definitions/user'
       responses:
         "200":
           description: successful operation
