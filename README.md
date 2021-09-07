@@ -30,7 +30,7 @@ in each component you will find the readme file with the specifications
 
 For execute this project
 
-1. execute npm i for instalation of dependences
+1. execute npm i for instalation of dependencies
 2. npm run dev or npm run prod
 
 *******for mor details please visit the documentation: ***********
