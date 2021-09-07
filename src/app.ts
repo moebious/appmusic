@@ -26,7 +26,7 @@ export class App {
     this.app.set("port", this.port || process.env.PORT || 5300);
     this.app.set("access-token", config.TOKEN_SECRET);
     this.app.set("dev", process.env.NODE_ENV || "development");
-    this.app.set("prod", process.env.NODE_ENV || "prod");
+    this.app.set("prod", process.env.NODE_ENV || "production");
     this.app.set("host", process.env.HOST || "127.0.0.1");
   }
 
@@ -34,7 +34,7 @@ export class App {
     this.app.use(morgan("dev"));
     this.app.use(cors());
     this.app.use(express.json());
-    this.app.use(express.static(__dirname + "/"));
+    this.app.use(express.static(__dirname + "/src"));
   }
 
   private routes() {

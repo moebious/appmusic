@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-      "title": "API app Music",
+      "title": "Music app API",
       "description": "A simple App of Music",
       "version": "1.0.0",
       "contact": {
@@ -16,7 +16,7 @@
     "paths": {
       "/": {
         "get": {
-          "summary": "Endpoint for list category music",
+          "summary": "Endpoint listing music categories",
           "description": "list Music",
           "produces": [
             "application/json"
@@ -112,7 +112,7 @@
           "tags": [
             "user"
           ],
-          "summary": "Returns a only user",
+          "summary": " Returns a only user",
           "description": "",
           "operationId": "getUser",
           "produces": [

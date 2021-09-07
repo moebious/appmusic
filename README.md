@@ -33,7 +33,13 @@ For execute this project
 1. execute npm i for instalation of dependencies
 2. npm run dev or npm run prod
 
+*******Depploy in Heroku ***********
+
+https://appmusicenjoy.herokuapp.com/
+
 *******for mor details please visit the documentation: ***********
+
+https://localhost:3000/docs
 
 https://app.swaggerhub.com/apis/appMusic/sample-api/1.0.0
 
