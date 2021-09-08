@@ -58,7 +58,7 @@
               "in": "query",
               "description": "The url playlist music of user",
               "required": true,
-              "type": "url"
+              "type": "string"
             }
           ],
           "responses": {
@@ -107,11 +107,8 @@
           }
         }
       },
-      "/user/{id}": {
+      "/user/": {
         "get": {
-          "tags": [
-            "user"
-          ],
           "summary": " Returns a only user",
           "description": "",
           "operationId": "getUser",
@@ -131,7 +128,7 @@
               "type": "integer",
               "example": 2,
               "schema": {
-                "$ref": "#/interface_adapters/IMusic"
+                "$ref": "#/interface_adapters/user"
               }
             }
           ],
@@ -269,9 +266,6 @@
     },
     "/login": {
       "post": {
-        "tags": [
-          "user"
-        ],
         "summary": "Logs user into the system",
         "description": "",
         "operationId": "loginUser",
@@ -282,14 +276,14 @@
         "parameters": [
           {
             "name": "email",
-            "in": "query",
+            "in": "body",
             "description": "The user email for login",
             "required": true,
             "type": "string"
           },
           {
             "name": "password",
-            "in": "query",
+            "in": "body",
             "description": "The password for login in clear text",
             "required": true,
             "type": "string",
@@ -326,7 +320,7 @@
     "definitions": {
       "user": {
         "properties": {
-          "id": {
+          "user_id": {
             "type": "integer"
           },
           "email": {
@@ -337,14 +331,14 @@
           }
         },
         "required": [
-          "id",
+          "user_id",
           "email",
           "password"
         ]
       },
       "music": {
         "properties": {
-          "id": {
+          "music_id": {
             "type": "integer"
           },
           "category": {
@@ -355,9 +349,6 @@
           },
           "url": {
             "type": "url"
-          },
-          "user_id": {
-            "type": "integer"
           }
         }
       }

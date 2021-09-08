@@ -17,7 +17,7 @@
     "prod": "set NODE_ENV=production && nodemon src/index.ts",
     "start": "node dist/server.js",
     "slint": "eslint --ext .ts . --fix",
-    "build": "tsc -p .",
+    "build": "webpack",
     "mysql": "nodemon src/database.ts",
     "webpack" : "npx webpack --config webpack.config.js"
   },

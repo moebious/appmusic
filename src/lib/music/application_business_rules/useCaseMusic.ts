@@ -25,9 +25,6 @@ export async function createCategory(req: Request, res: Response,) {
 	const conn = await connect();
 	await conn.query("INSERT INTO music SET ?", [newCategory,user_id,],)
 		.then(()=>{ 
-			if(user_id === null){
-				conn.query("UPDATE music SET ? WHERE music.user_id", [user_id,],);
-			}
 			res.status(200,).json({
 				message: "Category Created",
 				user: user_id,

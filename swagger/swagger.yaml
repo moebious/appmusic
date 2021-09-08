@@ -77,42 +77,6 @@ paths:
         "500":
           description: Invalid information
   /user/{id}:
-    get:
-      tags:
-      - user
-      summary: Returns a only user
-      description: ""
-      operationId: getUser
-      produces:
-      - application/xml
-      - application/json
-      schema:
-        $ref: '#/definitions/user'
-      parameters:
-      - name: id
-        in: query
-        description: The user id
-        required: true
-        type: integer
-        example: 2
-        schema:
-          $ref: '#/interface_adapters/IMusic'
-      responses:
-        "200":
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              type: integer
-              format: int32
-              description: calls per hour allowed by the user
-            X-Expires-After:
-              type: string
-              format: date-time
-              description: date in UTC when token expires
-          schema:
-            type: string
-        "500":
-          description: Invalid information
     post:
       tags:
       - user
@@ -186,7 +150,43 @@ paths:
           description: Invalid email supplied
         "404":
           description: User not found
-/login:
+  /login:
+     get:
+      tags:
+      - user
+      summary: Returns a only user
+      description: ""
+      operationId: getUser
+      produces:
+      - application/xml
+      - application/json
+      schema:
+        $ref: '#/definitions/user'
+      parameters:
+      - name: id
+        in: query
+        description: The user id
+        required: true
+        type: integer
+        example: 2
+        schema:
+          $ref: '#/interface_adapters/IMusic'
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "500":
+      description: Invalid information
     post:
       tags:
       - user
