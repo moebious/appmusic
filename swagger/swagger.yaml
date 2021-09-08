@@ -76,7 +76,7 @@ paths:
             type: string
         "500":
           description: Invalid information
-  /user/{id}:
+  /user/{user_id}:
     post:
       tags:
       - user
@@ -112,13 +112,13 @@ paths:
       - application/xml
       - application/json
       parameters:
-      - name: id
+      - name: user_id
         in: path
         description: name that need to be updated
         required: true
         type: integer
-      - in: body
-        name: body
+      - in: query
+        name: email
         description: Updated user object
         required: true
         schema:
@@ -138,7 +138,7 @@ paths:
       - application/xml
       - application/json
       parameters:
-      - name: id
+      - name: user_id
         in: path
         description: name that need to be updated
         required: true
@@ -151,42 +151,6 @@ paths:
         "404":
           description: User not found
   /login:
-     get:
-      tags:
-      - user
-      summary: Returns a only user
-      description: ""
-      operationId: getUser
-      produces:
-      - application/xml
-      - application/json
-      schema:
-        $ref: '#/definitions/user'
-      parameters:
-      - name: id
-        in: query
-        description: The user id
-        required: true
-        type: integer
-        example: 2
-        schema:
-          $ref: '#/interface_adapters/IMusic'
-      responses:
-        "200":
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              type: integer
-              format: int32
-              description: calls per hour allowed by the user
-            X-Expires-After:
-              type: string
-              format: date-time
-              description: date in UTC when token expires
-          schema:
-            type: string
-        "500":
-      description: Invalid information
     post:
       tags:
       - user
@@ -225,11 +189,12 @@ paths:
             type: string
         "400":
           description: Invalid email/password supplied
+    
   
 definitions:
   user:
     properties:
-      id:
+      user_id:
         type: integer
       email:
         type: string
@@ -242,7 +207,7 @@ definitions:
       - password
   music:
     properties:
-      id:
+      music_id:
         type: integer
       category:
         type: string
