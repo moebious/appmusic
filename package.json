@@ -17,9 +17,8 @@
     "prod": "set NODE_ENV=production && nodemon src/index.ts",
     "start": "node dist/server.js",
     "slint": "eslint --ext .ts . --fix",
-    "build": "webpack --mode production",
-    "mysql": "nodemon src/database.ts",
-    "webpack": "npx webpack --config webpack.config.js"
+    "build": "set NODE_ENV=production && nodemon src/index.ts",
+    "mysql": "nodemon src/database.ts"
   },
   "keywords": [
     "API",
@@ -42,10 +41,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "extract-text-webpack-plugin": "^3.0.2",
-    "node-sass": "^6.0.1",
     "nodemon": "^2.0.12",
-    "sass-loader": "^12.1.0",
-    "style-loader": "^3.2.1",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.2"
   },
@@ -62,6 +58,7 @@
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6",
     "ts-loader": "^9.2.5",
+    "webpack": "^5.52.0",
     "yaml": "^1.10.2"
   }
 }

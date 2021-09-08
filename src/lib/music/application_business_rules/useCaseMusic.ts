@@ -21,13 +21,12 @@ export async function getPlayList(req: Request, res: Response,): Promise<Respons
 
 export async function createCategory(req: Request, res: Response,) {
 	const newCategory: Music = req.body;
-	const user_id = req.params.user_id;
 	const conn = await connect();
-	await conn.query("INSERT INTO music SET ?", [newCategory,user_id,],)
+	await conn.query("INSERT INTO music SET ?", [newCategory])
 		.then(()=>{ 
 			res.status(200,).json({
 				message: "Category Created",
-				user: user_id,
+				
 			},);
 
 		},);
