@@ -28,7 +28,7 @@ export async function createUser(req: Request, res: Response) {
     const conn = await connect();
     await conn.query("SELECT email FROM user WHERE user.email = ?", [
       newUser.email,
-    ])
+    ]);
       conn.query("INSERT INTO user SET ?", [newUser]);
       const payload = { check: true };
       const token = jwt.sign(payload, "key", {
