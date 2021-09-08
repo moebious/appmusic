@@ -1,4 +1,5 @@
-swagger: "2.0"
+
+swagger: 2.0
 info:
   title: API app Music
   description: A simple App of Music
@@ -8,185 +9,180 @@ info:
     url: http://moebio.us
     email: kevin.vicent@gmail.com
 host: localhost:5300
-basePath: /
+basePath: "/"
 paths:
-  /:
+  "/":
     get:
       summary: Endpoint for list category music
       description: list Music
       produces:
-        - application/json
+      - application/json
       schema:
-        $ref: "#/definitions/music"
+        $ref: #/definitions/music
       responses:
         200:
-          description: OK
+        description: OK
     post:
       summary: Create category of Music
       description: Create Playlist Music
       produces:
-        - application/json
+      - application/json
       schema:
-        $ref: "#/definitions/music"
+        $ref: #/definitions/music
       parameters:
-        - name: category
-          in: query
-          description: The category
-          required: true
-          type: string
-        - name: playlist
-          in: query
-          description: The playlist music of user
-          required: true
-          type: string
-        - name: url
-          in: query
-          description: The url playlist music of user
-          required: true
-          type: string
+      - name: category
+        in: query
+        description: The category
+        required: true
+        type: string
+      - name: playlist
+        in: query
+        description: The playlist music of user
+        required: true
+        type: string
+      - name: url
+        in: query
+        description: The url playlist music of user
+        required: true
+        type: url
       responses:
         200:
-          description: OK
-  /user:
-    get:
-        tags:
-        - user
-        summary: Returns a list of users.
-        description: "List of User whit token"
-        operationId: getList
-        produces:
-        - application/xml
-        - application/json
-        schema:
-        $ref: "#/definitions/user"
-        responses:
-        "200":
-          description: successful operation
-        headers:
-          X-Rate-Limit:
-          type: integer
-          format: int32
-          description: calls per hour allowed by the user
-        X-Expires-After:
-          type: string
-        format: date-time
-          description: date in UTC when token expires
-          schema:
-        type: string
-        "500":
-          description: Invalid information
+        description: OK
+  "/user":
     post:
-        tags:
-          - user
-        summary: Create user
-        description: This can only be done by the logged in user.
-        operationId: createUser
-        produces:
-          - application/xml
-          - application/json
-        parameters:
-          - in: body
-            name: email
-            description: Created user object
-            required: true
-            example: jes@test.com
-          - in: body
-            name: password
-            description: Password
-            required: true
-            example: Ma2291624*
-            schema:
-              $ref: "#/definitions/user"
-        responses:
-          default:
-            description: successful operation
-/user/{user_id}:
-    get:
-        tags:
-        - user
-        summary: Returns a list of one user.
-        description: "List of One User whit token"
-        operationId: getUser
-        produces:
-        - application/xml
-        - application/json
+      tags:
+      - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - in: query
+        name: email
+        description: Created user object
+        required: true
+        example: jes@test.com
+      - in: query
+        name: password
+        description: Password
+        required: true
+        example: Ma2291624*
         schema:
-        $ref: "#/definitions/user"
-        responses:
-        "200":
+          $ref: #/definitions/user
+      responses:
+        default:
           description: successful operation
-        headers:
-          X-Rate-Limit:
-          type: integer
-          format: int32
-          description: calls per hour allowed by the user
-        X-Expires-After:
-          type: string
-        format: date-time
-          description: date in UTC when token expires
+    get:
+      tags:
+      - user
+      summary: Returns a list of users.
+      description: List of User whit token
+      operationId: getList
+      produces:
+      - application/xml
+      - application/json
+      schema:
+        $ref: #/definitions/user
+      responses:
+        200:
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
           schema:
-        type: string
-        "500":
+            type: string
+        500:
           description: Invalid information
+  "/user/{user_id}":
+    get:
+      tags:
+      - user
+      summary: Find user
+      description: This can only be done by the logged in user.
+      operationId: getUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: user_id
+        in: query
+        description: id that need to be find
+        required: true
+        type: integer
+        schema:
+          $ref: #/definitions/user
+      responses:
+        400:
+          description: Invalid email supplied
+        404:
+          description: User not found
     put:
       tags:
-        - user
+      - user
       summary: Updated user
       description: This can only be done by the logged in user.
       operationId: updateUser
       produces:
-        - application/xml
-        - application/json
+      - application/xml
+      - application/json
       parameters:
-        - name: user_id
-          in: path
-          description: name that need to be updated
-          required: true
-          type: integer
-        - in: query
-          name: email
-          description: Updated user object
-          required: true
-          schema:
-            $ref: "#/definitions/user"
+      - name: user_id
+        in: path
+        description: name that need to be updated
+        required: true
+        type: integer
+      - in: query
+        name: email
+        description: Updated user object
+        required: true
+        schema:
+          $ref: #/definitions/user
       responses:
-        "200":
+        '200':
           description: successful
-        "404":
+        '404':
           description: User not found
     delete:
       tags:
-        - user
+      - user
       summary: Delete user
       description: This can only be done by the logged in user.
       operationId: deleteUser
       produces:
-        - application/xml
-        - application/json
-      parameters:
-        - name: user_id
-          in: path
-          description: name that need to be updated
-          required: true
-          type: integer
-          schema:
-            $ref: "#/definitions/user"
-      responses:
-        "400":
-          description: Invalid email supplied
-        "404":
-          description: User not found
-/login:
-    post:
-    tags:
-      - user
-    summary: Logs user into the system
-    description: ""
-    operationId: loginUser
-    produces:
       - application/xml
       - application/json
-    parameters:
+      parameters:
+      - name: user_id
+        in: path
+        description: name that need to be updated
+        required: true
+        type: integer
+        schema:
+          $ref: #/definitions/user
+      responses:
+        400:
+          description: Invalid email supplied
+        404:
+          description: User not found
+  "/login":
+    post:
+      tags:
+      - user
+      summary: Logs user into the system
+      description: ''
+      operationId: loginUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
       - name: email
         in: query
         description: The user email for login
@@ -198,49 +194,45 @@ paths:
         required: true
         type: string
         schema:
-          $ref: "#/definitions/user"
-    responses:
-      "200":
-        description: successful operation
-        headers:
-          X-Rate-Limit:
-            type: integer
-            format: int32
-            description: calls per hour allowed by the user
-          X-Expires-After:
+          $ref: #/definitions/user
+      responses:
+        200:
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
             type: string
-            format: date-time
-            description: date in UTC when token expires
-        schema:
-          type: string
-      "400":
-        description: Invalid email/password supplied
+        400:
+          description: Invalid email/password supplied
 definitions:
-user:
-  properties:
-    user_id:
-      type: integer
-    email:
-      type: string
-    password:
-      type: string
-  # Both properties are required
-  required:
+  user:
+    properties:
+      user_id:
+        type: integer
+      email:
+        type: string
+      password:
+        type: string
+    required:
     - id
     - email
     - password
-music:
-  properties:
-    music_id:
-      type: integer
-    category:
-      type: string
-    playlist:
-      type: array
-    url:
-      type: url
-    user_id:
-      type:
-        integer
-        # : '#/interface_adapters/IUser'
-        # : '#/interface_adapters/IMusic'}
+  music:
+    properties:
+      music_id:
+        type: integer
+      category:
+        type: string
+      playlist:
+        type: array
+      url:
+        type: string
+      user_id:
+        type: integer

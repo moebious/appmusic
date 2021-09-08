@@ -1,13 +1,4 @@
 {
-  "include": [
-    "src/**/*",
-    "/swagger/types.d.ts/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "src/app/shared/**/*"
-  ],
   "compilerOptions": {
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
@@ -72,5 +63,16 @@
 
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
-  }
+  },
+  "include": ["./src/**/*", 
+    "./tests/**/**/*",
+    "webpack.common.js",
+    "webpack.dev.js",
+    "webpack.prod.js",
+    "/swagger/types.d.ts/**/*"],
+  "exclude": [
+    "node_modules/**/*",
+    "**/*.spec.ts",
+    "src/app/shared/**/*"
+  ]
 }

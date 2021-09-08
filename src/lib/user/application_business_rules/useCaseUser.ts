@@ -26,10 +26,9 @@ export async function createUser(req: Request, res: Response) {
   console.log(passwordValid);
   if (emailValid === true && passwordValid === true) {
     const conn = await connect();
-    let user = await conn.query("SELECT email FROM user WHERE user.email = ?", [
+    await conn.query("SELECT email FROM user WHERE user.email = ?", [
       newUser.email,
-    ]);
-    user.find(() => {
+    ])
       conn.query("INSERT INTO user SET ?", [newUser]);
       const payload = { check: true };
       const token = jwt.sign(payload, "key", {
@@ -40,7 +39,8 @@ export async function createUser(req: Request, res: Response) {
         token: token,
         expire: "Token expira en 20 minutos",
       });
-    });
+    
+   
   } else {
     res.status(400).json({
       emailValid,
@@ -71,7 +71,7 @@ export async function updateUser(req: Request, res: Response) {
   const id = req.params.id;
   const updateUser: User = req.body;
   const conn = await connect();
-  await conn.query("UPDATE user set WHERE user.user_id = ?", [id, updateUser]);
+  await conn.query("UPDATE user set WHERE user.user_id = ?", [updateUser, id]);
   res.json({
     message: "User Updated",
   });

@@ -27,7 +27,6 @@ export class App {
     this.app.set("access-token", config.TOKEN_SECRET);
     this.app.set("dev", process.env.NODE_ENV || "development");
     this.app.set("prod", process.env.NODE_ENV || "production");
-    this.app.set("host", process.env.HOST || "127.0.0.1");
   }
 
   private middlewares() {

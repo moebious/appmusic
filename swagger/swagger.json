@@ -53,7 +53,7 @@
             "in": "query",
             "description": "The url playlist music of user",
             "required": true,
-            "type": "url"
+            "type": "string"
           }
         ],
         "responses": {
@@ -71,17 +71,18 @@
          "produces": ["application/xml", "application/json"],
          "parameters": [
            {
-             "in": "body",
+             "in": "query",
              "name": "email",
              "description": "Created user object",
              "required": true,
              "example": "jes@test.com"
            },
            {
-             "in": "body",
+             "in": "query",
              "name": "password",
              "description": "Password",
              "required": true,
+             "type": "string",
              "example": "Ma2291624*",
              "schema": {
                "$ref": "#/definitions/user"
@@ -171,8 +172,8 @@
             "type": "integer"
           },
           {
-            "in": "query",
-            "name": "email",
+            "in": "body",
+            "name": "body",
             "description": "Updated user object",
             "required": true,
             "schema": {

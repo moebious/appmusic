@@ -23,13 +23,12 @@ export async function createCategory(req: Request, res: Response,) {
 	const newCategory: Music = req.body;
 	const conn = await connect();
 	await conn.query("INSERT INTO music SET ?", [newCategory])
-		.then(()=>{ 
-			res.status(200,).json({
-				message: "Category Created",
+	res.status(200,).json({
+			message: "Category Created",
 				
-			},);
+	},);
 
-		},);
+	
     
 }
 
