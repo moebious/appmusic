@@ -33,6 +33,19 @@ For execute this project
 1. execute npm i for instalation of dependencies
 2. npm run dev or npm run prod
 
+*******endpoints ***********
+
+https://localhost:5300 "/" - Method GET list playlist created by the users
+https://localhost:5300 "/" - Method POST add cateory of music  playlist created by the users
+https://localhost:5300 "/user" - Method GET list all users require token
+https://localhost:5300 "/user" - Method POST created user NOT require token
+https://localhost:5300 "/user/{id}" - Method GET list one user require token
+https://localhost:5300 "/user/{id}" - Method UPDATE update user require token
+https://localhost:5300 "/user/{id}" - Method DELETE delete user require token
+https://localhost:5300 "/login/{id}" - Method login user create token
+
+
+
 *******Depploy in Heroku ***********
 
 https://appmusicenjoy.herokuapp.com/
