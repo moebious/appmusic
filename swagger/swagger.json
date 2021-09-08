@@ -1,289 +1,240 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Music app API",
-      "description": "A simple App of Music",
-      "version": "1.0.0",
-      "contact": {
-        "name": "Kevin Vicent",
-        "url": "http://moebio.us",
-        "email": "kevin.vicent@gmail.com"
+  "swagger": "2.0",
+  "info": {
+    "title": "API app Music",
+    "description": "A simple App of Music",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Kevin Vicent",
+      "url": "http://moebio.us",
+      "email": "kevin.vicent@gmail.com"
+    }
+  },
+  "host": "localhost:5300",
+  "basePath": "/",
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Endpoint for list category music",
+        "description": "list Music",
+        "produces": ["application/json"],
+        "schema": {
+          "$ref": "#/definitions/music"
+        },
+        "responses": {
+          "200": null,
+          "description": "OK"
+        }
+      },
+      "post": {
+        "summary": "Create category of Music",
+        "description": "Create Playlist Music",
+        "produces": ["application/json"],
+        "schema": {
+          "$ref": "#/definitions/music"
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "playlist",
+            "in": "query",
+            "description": "The playlist music of user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "The url playlist music of user",
+            "required": true,
+            "type": "url"
+          }
+        ],
+        "responses": {
+          "200": null,
+          "description": "OK"
+        }
       }
     },
-    "host": "localhost:5300",
-    "licence": "MIT",
-    "basePath": "/",
-    "paths": {
-      "/": {
-        "get": {
-          "summary": "Endpoint listing music categories",
-          "description": "list Music",
-          "produces": [
-            "application/json"
-          ],
-          "schema": {
-            "$ref": "#/definitions/music"
-          },
-          "responses": {
-            "200": null,
-            "description": "OK"
-          }
+   "/user": {
+      "post": {
+         "tags": ["user"],
+         "summary": "Create user",
+         "description": "This can only be done by the logged in user.",
+         "operationId": "createUser",
+         "produces": ["application/xml", "application/json"],
+         "parameters": [
+           {
+             "in": "body",
+             "name": "email",
+             "description": "Created user object",
+             "required": true,
+             "example": "jes@test.com"
+           },
+           {
+             "in": "body",
+             "name": "password",
+             "description": "Password",
+             "required": true,
+             "example": "Ma2291624*",
+             "schema": {
+               "$ref": "#/definitions/user"
+             }
+           }
+         ],
+         "responses": {
+           "default": {
+             "description": "successful operation"
+           }
+         }
+       },
+      "get": {
+        "tags": ["user"],
+        "summary": "Returns a list of users.",
+        "description": "List of User whit token",
+        "operationId": "getList",
+        "produces": ["application/xml", "application/json"],
+        "schema": {
+          "$ref": "#/definitions/user"
         },
-        "post": {
-          "summary": "Create category of Music",
-          "description": "Create Playlist Music",
-          "produces": [
-            "application/json"
-          ],
-          "schema": {
-            "$ref": "#/definitions/music"
-          },
-          "parameters": [
-            {
-              "name": "category",
-              "in": "query",
-              "description": "The category",
-              "required": true,
-              "type": "string"
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {
+              "X-Rate-Limit": {
+                "type": "integer",
+                "format": "int32",
+                "description": "calls per hour allowed by the user"
+              },
+              "X-Expires-After": {
+                "type": "string",
+                "format": "date-time",
+                "description": "date in UTC when token expires"
+              }
             },
-            {
-              "name": "playlist",
-              "in": "query",
-              "description": "The playlist music of user",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "url",
-              "in": "query",
-              "description": "The url playlist music of user",
-              "required": true,
+            "schema": {
               "type": "string"
             }
-          ],
-          "responses": {
-            "200": null,
-            "description": "OK"
+          },
+          "500": {
+            "description": "Invalid information"
+          }
+        }
+      }
+    },
+   "/user/{user_id}": {
+      "get": {
+         "tags": ["user"],
+         "summary": "Find user",
+         "description": "This can only be done by the logged in user.",
+         "operationId": "getUser",
+         "produces": ["application/xml", "application/json"],
+         "parameters": [
+           {
+             "name": "user_id",
+             "in": "path",
+             "description": "id that need to be find",
+             "required": true,
+             "type": "integer",
+             "schema": {
+               "$ref": "#/definitions/user"
+             }
+           }
+         ],
+         "responses": {
+           "400": {
+             "description": "Invalid email supplied"
+           },
+           "404": {
+             "description": "User not found"
+           }
+         }
+       },
+      "put": {
+        "tags": ["user"],
+        "summary": "Updated user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "email",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "404": {
+            "description": "User not found"
           }
         }
       },
-      "/user": {
-        "get": {
-          "tags": [
-            "user"
-          ],
-          "summary": "Returns a list of users.",
-          "description": "List of User whit token",
-          "operationId": "getList",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "schema": {
-            "$ref": "#/definitions/user"
+      "delete": {
+        "tags": ["user"],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "integer",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid email supplied"
           },
-          "responses": {
-            "200": {
-              "description": "successful operation",
-              "headers": {
-                "X-Rate-Limit": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "calls per hour allowed by the user"
-                },
-                "X-Expires-After": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "date in UTC when token expires"
-                }
-              },
-              "schema": {
-                "type": "string"
-              }
-            },
-            "500": {
-              "description": "Invalid information"
-            }
-          }
-        }
-      },
-      "/user/": {
-        "get": {
-          "summary": " Returns a only user",
-          "description": "",
-          "operationId": "getUser",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "schema": {
-            "$ref": "#/definitions/user"
-          },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "query",
-              "description": "The user id",
-              "required": true,
-              "type": "integer",
-              "example": 2,
-              "schema": {
-                "$ref": "#/interface_adapters/user"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation",
-              "headers": {
-                "X-Rate-Limit": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "calls per hour allowed by the user"
-                },
-                "X-Expires-After": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "date in UTC when token expires"
-                }
-              },
-              "schema": {
-                "type": "string"
-              }
-            },
-            "500": {
-              "description": "Invalid information"
-            }
-          }
-        },
-        "post": {
-          "tags": [
-            "user"
-          ],
-          "summary": "Create user",
-          "description": "This can only be done by the logged in user.",
-          "operationId": "createUser",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "email",
-              "description": "Created user object",
-              "required": true,
-              "example": "jes@test.com"
-            },
-            {
-              "in": "body",
-              "name": "password",
-              "description": "Password",
-              "required": true,
-              "example": "Ma2291624*",
-              "schema": {
-                "$ref": "#/definitions/user"
-              }
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "successful operation"
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "user"
-          ],
-          "summary": "Updated user",
-          "description": "This can only be done by the logged in user.",
-          "operationId": "updateUser",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "name that need to be updated",
-              "required": true,
-              "type": "integer"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Updated user object",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/user"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "successful"
-            },
-            "404": {
-              "description": "User not found"
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "user"
-          ],
-          "summary": "Delete user",
-          "description": "This can only be done by the logged in user.",
-          "operationId": "deleteUser",
-          "produces": [
-            "application/xml",
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "name that need to be updated",
-              "required": true,
-              "type": "integer",
-              "schema": {
-                "$ref": "#/definitions/user"
-              }
-            }
-          ],
-          "responses": {
-            "400": {
-              "description": "Invalid email supplied"
-            },
-            "404": {
-              "description": "User not found"
-            }
+          "404": {
+            "description": "User not found"
           }
         }
       }
     },
     "/login": {
       "post": {
+        "tags": ["user"],
         "summary": "Logs user into the system",
         "description": "",
         "operationId": "loginUser",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
+        "produces": ["application/xml", "application/json"],
         "parameters": [
           {
             "name": "email",
-            "in": "body",
+            "in": "query",
             "description": "The user email for login",
             "required": true,
             "type": "string"
           },
           {
             "name": "password",
-            "in": "body",
+            "in": "query",
             "description": "The password for login in clear text",
             "required": true,
             "type": "string",
@@ -316,41 +267,41 @@
           }
         }
       }
-    },
-    "definitions": {
-      "user": {
-        "properties": {
-          "user_id": {
-            "type": "integer"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
+    }
+  },
+  "definitions": {
+    "user": {
+      "properties": {
+        "user_id": {
+          "type": "integer"
         },
-        "required": [
-          "user_id",
-          "email",
-          "password"
-        ]
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
       },
-      "music": {
-        "properties": {
-          "music_id": {
-            "type": "integer"
-          },
-          "category": {
-            "type": "string"
-          },
-          "playlist": {
-            "type": "array"
-          },
-          "url": {
-            "type": "url"
-          }
+      "required": ["id", "email", "password"]
+    },
+    "music": {
+      "properties": {
+        "music_id": {
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "playlist": {
+          "type": "array"
+        },
+        "url": {
+        "type": "string"
+        },
+        "user_id": {
+          "type": "integer"
         }
       }
     }
   }
+}

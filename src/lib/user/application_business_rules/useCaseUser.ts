@@ -11,7 +11,7 @@ export async function getList(
 ): Promise<Response | void> {
   try {
     const conn = await connect();
-    const user = await conn.query("SELECT * FROM user");
+    const user = await conn.query("SELECT user_id, email FROM user");
     return res.json(user[0]);
   } catch (error) {
     console.error("estoy pasando el error" + error);
@@ -26,7 +26,7 @@ export async function createUser(req: Request, res: Response) {
   console.log(passwordValid);
   if (emailValid === true && passwordValid === true) {
     const conn = await connect();
-    let user = await conn.query("SELECT * FROM user WHERE user.email = ?", [
+    let user = await conn.query("SELECT email FROM user WHERE user.email = ?", [
       newUser.email,
     ]);
     user.find(() => {
