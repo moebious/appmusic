@@ -1,6 +1,6 @@
 import { Request, Response, } from "express";
 import { connect, } from "../../data/database";
-import {Music,} from "../interface_adapters/iMusic";
+import {Music} from "../interface_adapters/iMusic";
 
 
 export function indexMusic(req: Request, res: Response,): Response {
@@ -23,10 +23,9 @@ export async function createCategory(req: Request, res: Response,) {
 	const newCategory: Music = req.body;
 	const conn = await connect();
 	await conn.query("INSERT INTO music SET ?", [newCategory]);
-	res.status(200,).json({
-			message: "Category Created",
-				
-	},);
+	res.status(200).json({
+			message: "Category Created"
+		});
 
 	
     

@@ -20,10 +20,11 @@ export class App {
     this.middlewares();
     this.routes();
   }
-  private port?: number | string
   
-  public settings() {
-    this.app.set("port", this.port || process.env.PORT || 5300);
+  public port= process.env.PORT || 5300
+  
+  private settings() {
+    this.app.set("port", this.port);
     this.app.set("access-token", config.TOKEN_SECRET);
     this.app.set("dev", process.env.NODE_ENV || "development");
     this.app.set("prod", process.env.NODE_ENV || "production");
@@ -43,7 +44,7 @@ export class App {
   }
 
   async listen(): Promise<void> {
-    await this.app.listen(this.app.get("port"));
-    console.log("Server on port", this.app.get("port"));
+    await this.app.listen(this.port);
+    console.log("Server on port", this.port);
   }
 }

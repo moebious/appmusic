@@ -18,9 +18,6 @@
         "summary": "Endpoint for list category music",
         "description": "list Music",
         "produces": ["application/json"],
-        "schema": {
-          "$ref": "#/definitions/music"
-        },
         "responses": {
           "200": null,
           "description": "OK"
@@ -30,30 +27,13 @@
         "summary": "Create category of Music",
         "description": "Create Playlist Music",
         "produces": ["application/json"],
-        "schema": {
-          "$ref": "#/definitions/music"
-        },
         "parameters": [
           {
-            "name": "category",
-            "in": "query",
+            "name": "body",
+            "in": "body",
             "description": "The category",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "playlist",
-            "in": "query",
-            "description": "The playlist music of user",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "url",
-            "in": "query",
-            "description": "The url playlist music of user",
-            "required": true,
-            "type": "string"
+            "schema": {"$ref": "#/definitions/music"}
           }
         ],
         "responses": {
@@ -71,22 +51,11 @@
          "produces": ["application/xml", "application/json"],
          "parameters": [
            {
-             "in": "query",
-             "name": "email",
+             "in": "body",
+             "name": "body",
              "description": "Created user object",
              "required": true,
-             "example": "jes@test.com"
-           },
-           {
-             "in": "query",
-             "name": "password",
-             "description": "Password",
-             "required": true,
-             "type": "string",
-             "example": "Ma2291624*",
-             "schema": {
-               "$ref": "#/definitions/user"
-             }
+             "schema": {"$ref": "#/definitions/user"}
            }
          ],
          "responses": {
@@ -101,9 +70,6 @@
         "description": "List of User whit token",
         "operationId": "getList",
         "produces": ["application/xml", "application/json"],
-        "schema": {
-          "$ref": "#/definitions/user"
-        },
         "responses": {
           "200": {
             "description": "successful operation",
@@ -142,10 +108,7 @@
              "in": "path",
              "description": "id that need to be find",
              "required": true,
-             "type": "integer",
-             "schema": {
-               "$ref": "#/definitions/user"
-             }
+             "type": "integer"
            }
          ],
          "responses": {
@@ -202,10 +165,7 @@
             "in": "path",
             "description": "name that need to be updated",
             "required": true,
-            "type": "integer",
-            "schema": {
-              "$ref": "#/definitions/user"
-            }
+            "type": "integer"
           }
         ],
         "responses": {
@@ -238,10 +198,7 @@
             "in": "query",
             "description": "The password for login in clear text",
             "required": true,
-            "type": "string",
-            "schema": {
-              "$ref": "#/definitions/user"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -298,9 +255,6 @@
         },
         "url": {
         "type": "string"
-        },
-        "user_id": {
-          "type": "integer"
         }
       }
     }
